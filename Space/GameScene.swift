@@ -12,7 +12,9 @@ import GameplayKit
 class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
+        let spaceShip = SKSpriteNode(imageNamed: "spaceship")
         
+        addChild(spaceShip)
     }
     
     
