@@ -51,9 +51,13 @@ class GameScene: SKScene {
         ship.run(moveAction)
     }
     
-    //MARK: - Создаем астероиды
+    //MARK: - Создаем астероид
     private func createAsteroid() -> SKSpriteNode {
         let asteroid = SKSpriteNode(imageNamed: "asteroid")
+        
+        let randomScale = CGFloat(GKRandomSource.sharedRandom().nextInt(upperBound: Int(4)))
+        asteroid.yScale = randomScale
+        asteroid.xScale = randomScale
         
         asteroid.position.x = CGFloat(GKRandomSource.sharedRandom().nextInt(upperBound: Int(frame.size.height / 6)))
         asteroid.position.y = frame.size.height + asteroid.size.height
@@ -63,12 +67,13 @@ class GameScene: SKScene {
         return asteroid
     }
     
+    //MARK: - Добавляем астероиды
     private func addAsteroid() {
         let asteroidCreate = SKAction.run {
             let asteroid = self.createAsteroid()
             self.addChild(asteroid)
         }
-        let creationDelay = SKAction.wait(forDuration: 1.0, withRange: 0.5)
+        let creationDelay = SKAction.wait(forDuration: 0.5, withRange: 1)
         let sequenceAction = SKAction.sequence([asteroidCreate, creationDelay])
         let runAction = SKAction.repeatForever(sequenceAction)
         
